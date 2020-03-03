@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: tomcat
-        image: actulance/test
+        image: actulance/kubetest
         ports:
         - containerPort: 8080
+

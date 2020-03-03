@@ -1,2 +1,2 @@
-FROM bitnami/tomcat:latest
-COPY sample.war /opt/bitnami/tomcat/webapps
+FROM tomcat
+COPY sample.war /usr/local/tomcat/webapps

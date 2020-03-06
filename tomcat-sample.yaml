@@ -20,3 +20,37 @@ spec:
         ports:
         - containerPort: 8080
 
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: tomcat-service
+spec:
+  type: NodePort
+  selector:
+    app: tomcat
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    name: http
+
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: tomcat-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: hello-world.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: tomcat-service
+          servicePort: 80
+
